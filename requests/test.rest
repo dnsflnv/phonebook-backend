@@ -7,3 +7,19 @@ GET http://localhost:3001/api/persons/50000
 GET http://localhost:3001/api/persons/2
 ###
 DELETE http://localhost:3001/api/persons/2
+###
+POST http://localhost:3001/api/persons/
+content-type: application/json
+
+{
+    "name": "Neron",
+    "number": "1888"
+}
+###
+POST http://localhost:3001/api/persons/
+content-type: application/json
+
+{
+    "name": "",
+    "number": ""
+}

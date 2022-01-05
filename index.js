@@ -58,18 +58,26 @@ app.delete('/api/persons/:id', (request, response) => {
 });
 
 const generateId = () => {
-    const maxId = notes.length > 0
-        ? Math.max(...notes.map(n => n.id))
+    const maxId = persons.length > 0
+        ? Math.max(...persons.map(p => p.id))
         : 0
     return maxId + 1
 }
 
-app.post('/api.persons', (request, response) => {
+app.post('/api/persons', (request, response) => {
     const body = request.body;
 
-    if (!body.name) {
+    if (!body.name || !body.number) {
         return response.status(400).json({
-            error: 'name missing'
+            error: 'name or number are missing'
+        });
+    }
+
+    const isExist = persons.find(p => p.name === body.name);
+
+    if (isExist) {
+        return response.status(400).json({
+            error: `${isExist.name} allready exists`
         });
     }
 
@@ -80,6 +88,8 @@ app.post('/api.persons', (request, response) => {
     };
 
     persons = persons.concat(newPreson);
+
+    response.json(newPreson);
 });
 
 const PORT = 3001;
