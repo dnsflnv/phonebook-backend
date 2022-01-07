@@ -2,4 +2,4 @@
 FullStack Open 2021
 
 
-Link to app: 
+Link to the app: https://polar-headland-96748.herokuapp.com/
