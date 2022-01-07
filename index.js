@@ -11,6 +11,10 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms :b
 
 app.use(express.json());
 
+const cors = require('cors');
+
+app.use(cors());
+
 let persons = [
     {
         "id": 1,
