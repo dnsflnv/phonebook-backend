@@ -3,6 +3,9 @@ const express = require('express');
 const morgan = require('morgan');
 const app = express();
 const cors = require('cors');
+require('dotenv').config();
+const mongoose = require('mongoose');
+const Person = require('./models/person');
 
 morgan.token('body', function getBody(request) {
     return JSON.stringify(request.body)
@@ -47,7 +50,9 @@ app.get('/info', (request, response) => {
 });
 
 app.get('/api/persons', (request, response) => {
-    response.json(persons);
+    Person.find({}).then(people => {
+        response.json(people);
+    })
 });
 
 app.get('/api/persons/:id', (request, response) => {
