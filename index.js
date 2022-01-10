@@ -88,23 +88,26 @@ app.post('/api/persons', (request, response) => {
         });
     }
 
-    const isExist = persons.find(p => p.name === body.name);
+    // const isExist = persons.find(p => p.name === body.name);
 
-    if (isExist) {
-        return response.status(400).json({
-            error: `${isExist.name} allready exists`
-        });
-    }
+    // if (isExist) {
+    //     return response.status(400).json({
+    //         error: `${isExist.name} allready exists`
+    //     });
+    // }
 
-    const newPreson = {
-        id: generateId(),
+    const newPerson = new Person({
+        //id: generateId(),
         name: body.name,
         number: body.number
-    };
+    });
 
-    persons = persons.concat(newPreson);
+    //persons = persons.concat(newPerson);
+    //response.json(newPerson);
 
-    response.json(newPreson);
+    newPerson.save().then(savedPerson => {
+        response.json(savedPerson);
+    });
 });
 
 const PORT = process.env.PORT || 3001;
