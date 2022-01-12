@@ -46,7 +46,6 @@ app.get('/api/persons/:id', (request, response, next) => {
         .catch(err => next(err));
 });
 
-// TODO: Make frontend work with it.
 app.delete('/api/persons/:id', (request, response, next) => {
     Person.findByIdAndRemove(request.params.id)
         .then(result => { response.status(204).end(); })
@@ -62,26 +61,27 @@ app.post('/api/persons', (request, response) => {
         });
     }
 
-    // const isExist = persons.find(p => p.name === body.name);
-
-    // if (isExist) {
-    //     return response.status(400).json({
-    //         error: `${isExist.name} allready exists`
-    //     });
-    // }
-
     const newPerson = new Person({
-        //id: generateId(),
         name: body.name,
         number: body.number
     });
 
-    //persons = persons.concat(newPerson);
-    //response.json(newPerson);
-
     newPerson.save().then(savedPerson => {
         response.json(savedPerson);
     });
+});
+
+app.put('/api/persons/:id', (request, response, next) => {
+    const body = request.body;
+    Person
+        .findByIdAndUpdate(request.params.id, {
+            name: body.name,
+            number: body.number
+        }, { new: true })
+        .then(updatedP => {
+            response.json(updatedP);
+        })
+        .catch(err => next(err));
 });
 
 const unknownEndpoint = (request, response) => {
