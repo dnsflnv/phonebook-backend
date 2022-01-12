@@ -10,14 +10,14 @@ POST http://localhost:3001/api/persons/
 content-type: application/json
 
 {
-    "name": "Neron",
-    "number": "1888"
+    "name": "Octavian",
+    "number": "12345678"
 }
 ###
 POST http://localhost:3001/api/persons/
 content-type: application/json
 
 {
-    "name": "",
-    "number": ""
+    "name": "New Man",
+    "number": "11"
 }
